@@ -23,7 +23,6 @@ public class FakeStoreProductDto {
         product.setDescrption(this.getDescription());
         product.setImage(this.getImage());
         return product;
-
     }
 
 }
