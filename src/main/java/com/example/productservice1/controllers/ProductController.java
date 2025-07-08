@@ -16,7 +16,6 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDTo> getProduct(@PathVariable String id) {
         Product product = productService.getProductById(id);
