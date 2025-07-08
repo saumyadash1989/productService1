@@ -15,7 +15,6 @@ public class FakeStoreProductService implements ProductService {
     public FakeStoreProductService(RestTemplateConfiguration restTemplate1) {
         this.restTemplate = restTemplate1.getRestTemplate();
     }
-
     @Override
     public List<Product> getProducts() {
         return List.of();
