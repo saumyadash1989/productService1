@@ -20,7 +20,6 @@ public class FakeStoreProductService implements ProductService {
     public List<Product> getProducts() {
         return List.of();
     }
-
     @Override
     public Product getProductById(String id) {
        FakeStoreProductDto fakeStoreProductDto= restTemplate.getForObject("https://fakestoreapi.com/products/" +id, FakeStoreProductDto.class);
