@@ -13,7 +13,6 @@ public class ProductResponseDTo {
     private double price;
     private String image;
 
-
     public static ProductResponseDTo getProductDto(Product product){
         ProductResponseDTo productDTo = new ProductResponseDTo();
         productDTo.setId(product.getId());
