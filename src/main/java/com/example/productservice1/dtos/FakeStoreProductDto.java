@@ -1,5 +1,7 @@
-package com.example.productservice1.models;
+package com.example.productservice1.dtos;
 
+import com.example.productservice1.models.Category;
+import com.example.productservice1.models.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +17,7 @@ public class FakeStoreProductDto {
 
     public Product toProduct() {
         Product product = new Product();
-        product.setId(this.getId());
+        product.setId(this.id);
         Category category = new Category();
         category.setName(this.getCategory());
         product.setCategory(category);
