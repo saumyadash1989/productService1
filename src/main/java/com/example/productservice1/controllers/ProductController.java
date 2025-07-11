@@ -1,11 +1,11 @@
 package com.example.productservice1.controllers;
 
 import com.example.productservice1.dtos.CreateProductRequestDto;
-import com.example.productservice1.dtos.ExceptionDto;
 import com.example.productservice1.exceptions.ProductNotFoundException;
 import com.example.productservice1.models.Product;
 import com.example.productservice1.dtos.ProductResponseDTo;
 import com.example.productservice1.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+
     private ProductService productService;
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("pruductServiceImpl") ProductService productService) {
         this.productService = productService;
     }
     @GetMapping("/{id}")
@@ -26,7 +27,7 @@ public class ProductController {
 
             Product product = productService.getProductById(id);
             ProductResponseDTo productResponseDTo = ProductResponseDTo.getProductDto(product);
-            responseEntity = new ResponseEntity(productResponseDTo, HttpStatus.BAD_GATEWAY);
+            responseEntity = new ResponseEntity(productResponseDTo, HttpStatus.OK);
          //Here we are return model dto object to client but its a java object but
         //when we call localhost:8080/products/1 in browser then it returns json file how it does
         //it happens due to jackson who does the serialisation and deserialisation

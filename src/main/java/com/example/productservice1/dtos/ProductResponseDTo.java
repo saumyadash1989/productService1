@@ -17,7 +17,7 @@ public class ProductResponseDTo {
     public static ProductResponseDTo getProductDto(Product product){
         ProductResponseDTo productDTo = new ProductResponseDTo();
         productDTo.setId(product.getId());
-        productDTo.setName(product.getNaame());
+        productDTo.setName(product.getTitle());
         productDTo.setCategory(product.getCategory().getName());
         productDTo.setPrice(product.getPrice());
         productDTo.setImage(product.getImage());
