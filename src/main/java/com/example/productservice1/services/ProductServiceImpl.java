@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("pruductServiceImpl")
 public class ProductServiceImpl implements ProductService {
@@ -20,24 +21,39 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }
-
-
-
-
     @Override
     public List<Product> getProducts() {
-
-
-        return List.of();
+      List<Product>  prodcuts =  productRepository.findAll();
+       return prodcuts;
     }
+
+    @Override
+    public List<Product> getProductsByCategory(String categoryName) {
+       List<Category> category=categoryRepository.findByName(categoryName);
+       List<Product>  prodcuts =  productRepository.findByCategory(category.get(0));
+      // List<Product> products= productRepository.findByCategory_Name(categoryName);
+      //List<Product> products=productRepository.getProductsByCategoryName(categoryName);
+//        List<Product> products= productRepository.getAllProductsByCategoryNameNative(categoryName);
+
+       return prodcuts;
+    }
+
+
 
     @Override
     public Product getProductById(long id) throws ProductNotFoundException {
-       Product product= productRepository.findById(id);
+      Optional< Product > product= productRepository.findById(id);
 
-        return product;
+      if(product.isEmpty()){
+          throw new ProductNotFoundException("Product not found");
+
+      }
+      Product product1 =product.get();
+//      Category category=product1.getCategory();
+//      product1.setCategory(category);
+
+        return product1;
     }
-
     @Override
     public Product createProduct(String name, String description, String image, double price, String category) {
         Product product = new Product();

@@ -1,10 +1,13 @@
 package com.example.productservice1.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.data.repository.cdi.Eager;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,8 +15,8 @@ import lombok.Setter;
 public class Category extends BaseModel {
 
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
+    @Fetch(FetchMode.JOIN)
+    private List<Product> products;
 
 }

@@ -37,6 +37,12 @@ public class FakeStoreProductService implements ProductService {
       return products;
 
     }
+
+    @Override
+    public List<Product> getProductsByCategory(String categoryName) {
+        return List.of();
+    }
+
     @Override
     public Product getProductById(long  id) throws ProductNotFoundException {
 

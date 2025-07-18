@@ -48,6 +48,17 @@ public class ProductController {
         return  ResponseEntity.ok(productResponseDTos);
 
     }
+    @GetMapping("/category/{name}")
+    public List<ProductResponseDTo> getProductsByCategory(@PathVariable String name) {
+        List<ProductResponseDTo>  productResponseDTos= new ArrayList<>();
+        List<Product> products=productService.getProductsByCategory(name);
+        for(Product product : products) {
+            ProductResponseDTo productResponseDTo = ProductResponseDTo.getProductDto(product);
+            productResponseDTos.add(productResponseDTo);
+
+        }
+        return   productResponseDTos;
+    }
     @PostMapping("/")
     public ResponseEntity<ProductResponseDTo> createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
         Product product=productService.createProduct(createProductRequestDto.getName(),
@@ -55,8 +66,9 @@ public class ProductController {
                 createProductRequestDto.getImage(),
                 createProductRequestDto.getPrice(),
                 createProductRequestDto.getCategory());
+
         ResponseEntity<ProductResponseDTo> responseEntity;
-        responseEntity = new ResponseEntity(product, HttpStatus.CREATED);
+        responseEntity = new ResponseEntity(ProductResponseDTo.getProductDto(product), HttpStatus.CREATED);
         return responseEntity;
 
     }
