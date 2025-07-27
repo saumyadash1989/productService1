@@ -15,12 +15,16 @@ public class ProductResponseDTo {
     private String image;
 
     public static ProductResponseDTo getProductDto(Product product){
+        if(product == null){
+            return null;
+        }
         ProductResponseDTo productDTo = new ProductResponseDTo();
         productDTo.setId(product.getId());
         productDTo.setName(product.getTitle());
         productDTo.setCategory(product.getCategory().getName());
         productDTo.setPrice(product.getPrice());
         productDTo.setImage(product.getImage());
+        productDTo.setDescription(product.getDescrption());
         return productDTo;
 
     }

@@ -18,21 +18,22 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
-    public ProductController(@Qualifier("pruductServiceImpl") ProductService productService) {
+    public ProductController(@Qualifier("fakestoreProductService") ProductService productService) {
         this.productService = productService;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDTo> getProduct(@PathVariable long id) throws ProductNotFoundException {
+    public ProductResponseDTo getProduct(@PathVariable long id) throws ProductNotFoundException {
         ResponseEntity responseEntity;
 
             Product product = productService.getProductById(id);
             ProductResponseDTo productResponseDTo = ProductResponseDTo.getProductDto(product);
-            responseEntity = new ResponseEntity(productResponseDTo, HttpStatus.OK);
-         //Here we are return model dto object to client but its a java object but
-        //when we call localhost:8080/products/1 in browser then it returns json file how it does
-        //it happens due to jackson who does the serialisation and deserialisation
-
-        return responseEntity;
+//            responseEntity = new ResponseEntity(productResponseDTo, HttpStatus.OK);
+//         //Here we are return model dto object to client but its a java object but
+//        //when we call localhost:8080/products/1 in browser then it returns json file how it does
+//        //it happens due to jackson who does the serialisation and deserialisation
+//
+//        return responseEntity;
+        return productResponseDTo;
 
     }
     @GetMapping("/")
@@ -48,6 +49,7 @@ public class ProductController {
         return  ResponseEntity.ok(productResponseDTos);
 
     }
+
     @GetMapping("/category/{name}")
     public List<ProductResponseDTo> getProductsByCategory(@PathVariable String name) {
         List<ProductResponseDTo>  productResponseDTos= new ArrayList<>();
