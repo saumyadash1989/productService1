@@ -3,8 +3,12 @@ package com.example.productservice1.repositories;
 import com.example.productservice1.models.Category;
 import com.example.productservice1.models.Product;
 import jakarta.websocket.server.PathParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -25,4 +29,5 @@ public interface ProductRepository extends JpaRepository<Product,String> {
     public List<Product> getProductsByCategoryName(String categoryName);
     @Query(value = "select * from Product where category_id in(select category_id from Category  where name =:categoryName)",nativeQuery = true)
     public List<Product> getAllProductsByCategoryNameNative(String categoryName);
+    Page<Product> findByTitleContaining(String query, Pageable pageable);
 }

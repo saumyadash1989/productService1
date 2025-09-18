@@ -7,6 +7,7 @@ import com.example.productservice1.models.Product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ import static org.mockito.Mockito.*;
 
 public class FakeStoreServiceTest {
     RestTemplate restTemplate = Mockito.mock(RestTemplate.class);
-    FakeStoreProductService fakeStoreProductServic= new FakeStoreProductService(restTemplate);
+    RedisTemplate redisTemplate = Mockito.mock(RedisTemplate.class);
+    FakeStoreProductService fakeStoreProductServic= new FakeStoreProductService(restTemplate,redisTemplate);
     @Test
     public void testGetProductByIdReturnsProduct() throws ProductNotFoundException {
         FakeStoreProductDto fakeStoreProductDto= ProductHelper.getFakeStoreProductDto(1L,"title",12.56,"image.url",
